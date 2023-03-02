@@ -2,8 +2,9 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
 import {getCountries} from "../action";
-import Card from "./Card"
-import Paginado from "./Paginado"
+import Card from "./Card/Card"
+import Paginado from "./Paginado/Paginado"
+import SeachBar from "./SearchBar";
 export default function Home(){
     const dispatch=useDispatch()
     const allCountries=useSelector(state=>state.countries) ||[];
@@ -61,6 +62,9 @@ console.log("estooooooo...",allCountries)
                         allCountries={allCountries.length}
                         paginado={paginado}
                 />
+                   <SeachBar/> 
+                </div>
+                <div>
                {currentCountry?
                currentCountry.map((e,index)=>{
                     return (
@@ -73,10 +77,6 @@ console.log("estooooooo...",allCountries)
                })
                : console.log("cargandoooo....")
                 }
-
-
-                
-               
             </div>
         </div>
     )

@@ -1,10 +1,11 @@
 import React from "react";
+import "./card.css"
 //import { Link } from "react-router-dom";
 
 export default function Card({city,image,continente}){
 
     return (
-        <div >
+        <div className="card">
            <h2>{city}</h2>
            <img src={image}
             alt="imagene no funciona"
