@@ -10,3 +10,25 @@ return async function(dispatch){
 }   
 
 }
+export function getCountryByName(name){
+return async function (dispatch){
+    try {
+         const json= await axios.get("http://localhost:3001/countries?name="+ name)
+    return dispatch({
+        type:"COUNTRY_BY_NAME",
+        payload:json.data
+    })
+    } catch (error) {
+        return error;
+    }
+   
+}
+}
+export function getOrderAbc(payload){
+
+        return {
+            type:"ORDER_BY_NAME",
+            payload
+        }       
+}
+    

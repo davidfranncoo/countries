@@ -1,16 +1,38 @@
 import React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getCountryByName } from "../action";
 
-export default function SeachBar(){
+export default function SeachBar() {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
 
+  function hardlerChange(e) {
+    console.log(e.target.value);
+    e.preventDefault();
+    setName(e.target.value);
+  }
 
-        return (
-            <div>
-                <input 
-                type="text"></input>
-                    <button>ingresa ciudad</button>
+  function handlerClick(e) {
+    e.preventDefault();
+    dispatch(getCountryByName(name));
+    setName("");
+    console.log("Nombre:", name);
 
-            </div>
-        )
+  }
 
-
+  return (
+    <div>
+      <input
+        type="text"
+        //agregando el value, podemos hacer que el input se limpie adecuadamente una vez haga el click
+        value={name}
+        placeholder="Ingresa país..."
+        onChange={(e) => hardlerChange(e)}
+      ></input>
+      <button type="submit" onClick={(e) => handlerClick(e)}>
+        Buscar país
+      </button>
+    </div>
+  );
 }
