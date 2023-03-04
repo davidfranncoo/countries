@@ -31,4 +31,11 @@ export function getOrderAbc(payload){
             payload
         }       
 }
-    
+   
+export function getFilterByContinent(payload){
+
+    return {
+        type:"FILTER_BY_CONTINENT",
+        payload,
+    }
+}

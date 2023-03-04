@@ -1,5 +1,6 @@
 const intialState={
-    countries:[]
+    countries:[],
+    suportCountries:[]
 }
 export default function rootRecuducer(state=intialState,action){
 
@@ -7,7 +8,8 @@ export default function rootRecuducer(state=intialState,action){
         case "GET_COUNTRIES":
             return {
                 ...state,
-                countries:action.payload
+                countries:action.payload,
+                suportCountries:action.payload
             }
         case "COUNTRY_BY_NAME":
             return{
@@ -33,6 +35,17 @@ export default function rootRecuducer(state=intialState,action){
                 ...state,
                 countries:orderCountry
             }
+        case "FILTER_BY_CONTINENT":
+            const continent=action.suportCountries;
+            const filter=action.payload==="all"?
+            continent:
+            continent.filter((e)=>e.continente===action.payload)
+
+            return {
+                ...state,
+                countries:[filter]
+            }
+
             default:
                 return state;
     }

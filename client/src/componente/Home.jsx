@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
-import {getCountries, getOrderAbc} from "../action";
+import {getCountries, getOrderAbc, getFilterByContinent} from "../action";
 import Card from "./Card/Card"
 import Paginado from "./Paginado/Paginado"
 import SeachBar from "./SearchBar";
@@ -35,8 +35,9 @@ function handlerOrder(e){
     setOrder(`${e.target.value}`)
 
 }
-    
-
+function handlerFilterByContinent(e){
+    dispatch(getFilterByContinent(e))    
+}
 
 //para que se cargue ni bien le levante
 useEffect(()=>{
@@ -64,9 +65,14 @@ useEffect(()=>{
                     <option value="asce">pobacion mayAmen</option>
                     <option value="desc">Descendente maenAmay</option>
                 </select>
-                <select>
-                    <option value="con1">continente 1</option>
-                    <option value="cont2">continente 2</option>
+                <select onClick={(e)=>handlerFilterByContinent(e)}>
+                    <option value="all">Todos Los Continentes</option>
+                    <option value="Europe">Europeo</option>
+                    <option value="Africa">Africano</option>
+                    <option value="Oceania">Oceanico</option>
+                    <option value="North America">Norteamericano</option>
+                    <option value="South America">Suramericano</option>
+                    <option value="Antarctica">Antartico</option>
                   
                 </select>
                 <select>
