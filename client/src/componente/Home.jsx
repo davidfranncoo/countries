@@ -36,7 +36,7 @@ function handlerOrder(e){
 
 }
 function handlerFilterByContinent(e){
-    dispatch(getFilterByContinent(e))    
+    dispatch(getFilterByContinent(e.target.value))    
 }
 
 //para que se cargue ni bien le levante
@@ -65,7 +65,7 @@ useEffect(()=>{
                     <option value="asce">pobacion mayAmen</option>
                     <option value="desc">Descendente maenAmay</option>
                 </select>
-                <select onClick={(e)=>handlerFilterByContinent(e)}>
+                <select onChange={(e)=>handlerFilterByContinent(e)}>
                     <option value="all">Todos Los Continentes</option>
                     <option value="Europe">Europeo</option>
                     <option value="Africa">Africano</option>

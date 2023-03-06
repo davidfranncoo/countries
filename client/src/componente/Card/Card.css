@@ -4,9 +4,5 @@
     width: 200px; /* Ajusta este ancho al tamaño que desees */
     margin-right: 10px; /* Agrega un margen derecho para separar los elementos */
     vertical-align: top; /* Alinea los elementos en la parte superior */
-  
-}
-img{
-   
-    border: 7px solid black
+   border:7px solid black;
 }

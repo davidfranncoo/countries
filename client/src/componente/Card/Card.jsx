@@ -6,11 +6,11 @@ export default function Card({city,image,continente}){
 
     return (
         <div className="card">
-           <h2>{city}</h2>
            <img src={image}
             alt="imagene no funciona"
             width="200px"
             height="250px"></img>
+            <h2>{city}</h2>
            <h3>{continente}</h3>
 
 

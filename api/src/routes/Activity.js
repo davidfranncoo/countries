@@ -7,7 +7,7 @@ const router = Router();
 router.post("/", async(req,res)=>{
 
     //recimos por parametro
-     const {
+     const{
          name,
          dificultad,
          duracion,

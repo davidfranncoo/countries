@@ -38,4 +38,5 @@ export function getFilterByContinent(payload){
         type:"FILTER_BY_CONTINENT",
         payload,
     }
+
 }

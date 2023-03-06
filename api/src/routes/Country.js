@@ -34,16 +34,20 @@ const getCountries=async()=>{
 
     
 router.get("/",async(req,res)=>{
+
        //?---traemos la informacion de la API
+       const {name}=req.query;// en caso que recibamos el nombre
        const infoApi=await getCountries();
-       const {name}=req.query;
        const dataBase=await Country.findAll()
+
+       //? SI recibimos el el name por query 
             if(name){
                 const dataBase=await Country.findAll();
                 const nameDb=await dataBase.find((e)=>e.name===name)
                 if(nameDb) return res.status(200).json(nameDb);
                 return res.status(400).send("no existe ciudad con este nombre")
             }
+        //?SI esta vacia la Db
             if(dataBase.length===0){
              try{
                 //?guardamos la informacion,de la API en la DB
@@ -51,7 +55,7 @@ router.get("/",async(req,res)=>{
                 //? aca busc por query
         return res.status(200).json(updateDb)     
             } catch (error) {
-                 console.log("error")
+                 return error;
             }}else{
         return  res.status(200).json(dataBase);
             }})
@@ -61,34 +65,15 @@ router.get("/",async(req,res)=>{
 
     
 router.get("/:id", async(req,res)=>{
+    //? buscamos por ID e incluimos la Activity
         const {id}=req.params;
-        const t=await Country.findAll()
-         console.log(t)
         try {
-        const city = t.find((e)=>e.id===id)
-            if (!city ) { 
-             return res.status(404).json({ message: 'Receta no encontrada' });
-            }
-           const cityDetails = {
-             id: city .id,
-             name: city .name,
-             image: city .image,
-             continente:city.continente,
-             capital:city.capital,
-             subregion:city.subregion,
-             area:city.area,
-             poblacion:city.poblacion,
-             //activities
-            
-           };
-            return res.status(200).json(cityDetails);
-          } catch (error) {
-           
-            return res.status(500).json({ message: 'Error interno del servidor' });
-          }
-    
-    
-    
-    
+
+             const getId=await Country.findByPk(id,{include:Activity})
+             if(!getId){
+                return res.status(400).send({error:"El Id no Existe"})
+             }
+             return res.status(200).json(getId)
+            }catch (error){return error;}
     })
     module.exports=router;
