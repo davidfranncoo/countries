@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { postActivity } from "../action";
+import { getCountries, postActivity } from "../action";
 
 export default function CreatedActivity(){
 const dispatch=useDispatch();
@@ -11,12 +11,14 @@ const [input,setInput]=useState({
     dificultad:"",
     duracion:"",
     temporada:"",
-    countri:[]
+    countri: [],
 
 })
+useEffect(()=>{
+    dispatch(getCountries())
+}, [dispatch])
 //? funcion para cuando hay cambios en el input.
 function handlerInput(e){
-    e.preventDefault()
     setInput({
         ...input,
         [e.target.name]:e.target.value
@@ -27,7 +29,6 @@ function handlerInput(e){
 //? funcion para seleccionar los paises que tienen las aactividades
 function handlerActivity(e){
     console.log("input",input)
-    e.preventDefault() 
     setInput(({
         ...input,
         countri: [...input.countri, e.target.value]
@@ -45,7 +46,7 @@ function handlerSubmit(e){
         dificultad:"",
         duracion:"",
         temporada:"",
-        countri:[]
+        countri:[],
     
 })
 alert("se creo la actividad")}
@@ -57,13 +58,14 @@ alert("se creo la actividad")}
                 <button>Atras</button>
             </Link>
             <h1>Crear Actividad</h1>
-        <form>
+        <form onSubmit={(e)=>handlerSubmit(e)}> 
             <div>
                 <label>Nombre de la Actividad 
                 <input 
                 type="text" 
                 placeholder="name"
                 name="name"
+                value={input.name}
                 onChange={(e)=>handlerInput(e)}></input></label>
             </div>
 
@@ -71,7 +73,9 @@ alert("se creo la actividad")}
                 <label>Dificultad
                     <select 
                     name="dificultad"
+                    value={input.dificultad}
                     onChange={(e)=>handlerInput(e)}>
+                        <option value=""></option>
                         <option value="Facil">Facil</option>
                         <option value="Intermedio">Intermedio</option>
                         <option value="Complejo">Complejo</option>
@@ -82,7 +86,10 @@ alert("se creo la actividad")}
                 <label>Temporada
                     <select 
                     name="temporada"
+                    value={input.temporada}
                     onChange={(e)=>handlerInput(e)}>
+                        <option  value=""></option>
+
                         <option value="Verano">Verano</option>
                         <option value="Otoño">Otoño</option>
                         <option value="Primavera">Primavera</option>
@@ -97,8 +104,10 @@ alert("se creo la actividad")}
                     type="number" 
                     placeholder="tiempo de la actividad"
                     name="duracion"
+                    value={input.duracion}
                     onChange={(e)=>handlerInput(e)}/>
                 </label>
+                
             </div>
 
             <div>
@@ -106,7 +115,8 @@ alert("se creo la actividad")}
                 <label>Paises 
                     <select 
                     name="countri"
-                    onChange={(e)=>handlerActivity(e)}
+                   value={input.countri}
+                   onChange={(e)=>handlerActivity(e)}
                    >
                     <option value=""> </option>
                     {nameCountry.map((e,index)=>{
@@ -131,7 +141,7 @@ alert("se creo la actividad")}
             
            
 
-            <button type="submit" onClick={(e)=>handlerSubmit(e)}>Enviar</button>
+            <button type="submit" >Enviar</button>
 
             
 

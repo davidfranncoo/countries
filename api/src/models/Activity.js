@@ -23,7 +23,8 @@ module.exports = (sequelize) => {
           
         },
         temporada:{
-           type:DataTypes.ENUM('Verano', 'Otoño', 'Invierno', 'Primavera'), 
+            //! controlar el datatype porque era ENUM
+           type:DataTypes.STRING, 
             allowNull:false,
         }
     });
