@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
             allowNull:false,
         },
         dificultad:{
-            type:DataTypes.INTEGER,
+            type:DataTypes.STRING,
             allowNull:false,
         },
         duracion:{

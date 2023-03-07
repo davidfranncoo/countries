@@ -40,3 +40,15 @@ export function getFilterByContinent(payload){
     }
 
 }
+//? Agregar activad nueva
+export function postActivity(payload){
+    return async function(dispatch){
+
+        const response= await axios.post("http://localhost:3001/activities",payload)
+        
+        return {
+            type:"POST_ACTIVITY",
+            response,
+        }
+    }
+}

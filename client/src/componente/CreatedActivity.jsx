@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { postActivity } from "../action";
 
 export default function CreatedActivity(){
-
+const dispatch=useDispatch();
 const  nameCountry= useSelector(state=>state.nameCounties)||[];
 const [input,setInput]=useState({
     name:"",
     dificultad:"",
     duracion:"",
-    activity:[]
+    temporada:"",
+    countri:[]
 
 })
-
-
+//? funcion para cuando hay cambios en el input.
 function handlerInput(e){
     e.preventDefault()
     setInput({
@@ -22,16 +23,32 @@ function handlerInput(e){
     })
     console.log("nameeee",input)
 }
+
+//? funcion para seleccionar los paises que tienen las aactividades
 function handlerActivity(e){
     console.log("input",input)
-    e.preventDefault()
-    const value=e.target.value
-    setInput(prevState => ({
-        ...prevState,
-        activity: [...prevState.activity, value]
+    e.preventDefault() 
+    setInput(({
+        ...input,
+        countri: [...input.countri, e.target.value]
     }))
 
 }
+//?funcion para despachar el post
+function handlerSubmit(e){
+    e.preventDefault()
+
+    dispatch(postActivity(input));
+
+    setInput({
+        name:"",
+        dificultad:"",
+        duracion:"",
+        temporada:"",
+        countri:[]
+    
+})
+alert("se creo la actividad")}
 
 
     return(
@@ -55,9 +72,21 @@ function handlerActivity(e){
                     <select 
                     name="dificultad"
                     onChange={(e)=>handlerInput(e)}>
-                        <option>Facil</option>
-                        <option>Intermedio</option>
-                        <option>Complejo</option>
+                        <option value="Facil">Facil</option>
+                        <option value="Intermedio">Intermedio</option>
+                        <option value="Complejo">Complejo</option>
+                    </select>
+                </label>
+            </div>
+            <div>    
+                <label>Temporada
+                    <select 
+                    name="temporada"
+                    onChange={(e)=>handlerInput(e)}>
+                        <option value="Verano">Verano</option>
+                        <option value="Otoño">Otoño</option>
+                        <option value="Primavera">Primavera</option>
+                        <option value="invierno">invierno</option>
                     </select>
                 </label>
             </div>
@@ -73,12 +102,13 @@ function handlerActivity(e){
             </div>
 
             <div>
+                    {/* vamos a mostrar todos los paises y vamos a agregar en e el mostrrador */}
                 <label>Paises 
                     <select 
-                    name="activity"
+                    name="countri"
                     onChange={(e)=>handlerActivity(e)}
                    >
-                    {/* vamos a mostrar todos los paises y vamos a agregar en e el mostrrador */}
+                    <option value=""> </option>
                     {nameCountry.map((e,index)=>{
                         return (
                             <option 
@@ -88,11 +118,20 @@ function handlerActivity(e){
                             )})}
                     </select>
                 </label>
+
+                {/* nomstrar en pantalla */}
+                <ul>
+                    {
+                        input.countri.map((e,index)=>{
+                            return( <li key={index}> {e}</li>)
+                        })
+                    }
+                </ul>
             </div>
             
            
 
-            <button type="submit">Enviar</button>
+            <button type="submit" onClick={(e)=>handlerSubmit(e)}>Enviar</button>
 
             
 

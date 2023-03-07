@@ -48,6 +48,10 @@ export default function rootRecuducer(state=intialState,action){
                 ...state,
                 countries:filter
             }
+        case "POST_ACTIVITY":
+            return{
+                ...state,
+            }
 
             default:
                 return state;
