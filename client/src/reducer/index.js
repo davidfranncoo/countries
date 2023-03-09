@@ -1,7 +1,8 @@
 const intialState={
     countries:[],
     suportCountries:[],
-    nameCounties:[]
+    nameCounties:[],
+    details:[]
 }
 export default function rootRecuducer(state=intialState,action){
 
@@ -53,8 +54,42 @@ export default function rootRecuducer(state=intialState,action){
                 ...state,
             }
 
+        case "ONE_DETAILS":
+            return{
+                details:action.payload
+            }
             default:
                 return state;
     }
     
 }
+/*area
+: 
+"12173"
+capital
+: 
+"{Stanley}"
+continente
+: 
+"South America"
+createdAt
+: 
+"2023-03-09T20:57:11.230Z"
+id
+: 
+"FLK"
+img
+: 
+"https://flagcdn.com/fk.svg"
+name
+: 
+"Falkland Islands"
+poblacion
+: 
+"2563"
+subregion
+: 
+"South America"
+updatedAt
+: 
+"2023-03-09T20:57:11.230Z" */

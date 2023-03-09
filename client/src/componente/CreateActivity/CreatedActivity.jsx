@@ -7,19 +7,8 @@ import "./CreateActivity.css"
 export default function CreatedActivity(){
 const dispatch=useDispatch();
 const  nameCountry= useSelector(state=>state.nameCounties)||[];
-const [input,setInput]=useState({
-    name:"",
-    dificultad:"",
-    duracion:"",
-    temporada:"",
-    countri: [],
-
-})
-
 const [error,setError]=useState({})
-//?usamos pas expresiones regulares
-
-
+const [input,setInput]=useState({name:"", dificultad:"", duracion:"", temporada:"", countri: []})
 
 useEffect(()=>{
     dispatch(getCountries())
@@ -27,60 +16,45 @@ useEffect(()=>{
 
  function validacion(valor){
     let error={}
+        if(!/^[a-zA-Z\s]+$/.test(valor.name)) error.name="Debes ingresar solo letras"
+        if(!valor.dificultad) error.dificultad=" No debes agregar una Dificultad"
+        if(!valor.duracion) error.duracion="Debes agregar una Duracion"
+        if(!valor.temporada) error.temporada="Debes agregar una Tempòrada" 
+        if(!valor.countri) error.countri="Debes agregar un pais"    
 
-        if(!/^[a-zA-Z\s]+$/.test(valor.name)){
-             console.log("esta mal el name")
-             error.name="Debes ingresar solo letras"
-        }
     return error}
 
 //? funcion para cuando hay cambios en el input.
 function handlerInput(e){
-    setInput({
-        ...input,
-        [e.target.name]:e.target.value
-    })
-     setError(validacion({
-        ...input,
-        [e.target.name]:e.target.value
-     }))
+
+    setInput({...input,[e.target.name]:e.target.value})
+    setError(validacion({...input,[e.target.name]:e.target.value}))
 }
 
-//? funcion para seleccionar los paises que tienen las aactividades
+//? funcion para seleccionar los paises que tienen las actividades
 function handlerActivity(e){
     console.log("input",input)
     setInput({
         ...input,
         countri: [...input.countri, e.target.value]
-    })
-    
-   
+    })   
+     setError(validacion({...input.countri,countri:e.target.value}))
 }
 
 //?funcion para despachar el post
 function handlerSubmit(e){
     e.preventDefault()
-
     dispatch(postActivity(input));
-
-    setInput({
-        name:"",
-        dificultad:"",
-        duracion:"",
-        temporada:"",
-        countri:[],
-        
-    })
+    setInput({name:"", dificultad:"", duracion:"", temporada:"", countri:[]})
     alert("se creo la actividad")}
     
-    
-  
+//------------------MAKETADO-------------------------
     return(
         <div>    
             <Link to="/Home">
                 <button> Atras </button>
             </Link>
-            <h1>Crear Actividad</h1>
+        <h1>Crear Actividad</h1>
         <form onSubmit={(e)=>handlerSubmit(e)}> 
             <div>
                 <label>Nombre de la Actividad 
@@ -105,8 +79,9 @@ function handlerSubmit(e){
                         <option value="Complejo">Complejo</option>
                     </select>
                 </label>
-                <span>{error.dificultad? error.dificultad: ""}</span>
+                {error.dificultad? <span> {error.dificultad}</span>: ""}
             </div>
+
             <div>    
                 <label>Temporada
                     <select 
@@ -121,6 +96,7 @@ function handlerSubmit(e){
                         <option value="invierno">invierno</option>
                     </select>
                 </label>
+            {error.temporada? <span>{error.temporada}</span>:  ""}
             </div>
 
             <div>
@@ -132,7 +108,7 @@ function handlerSubmit(e){
                     value={input.duracion}
                     onChange={(e)=>handlerInput(e)}/>
                 </label>
-                
+                {error.duracion? <span>{error.duracion}</span>: ""}
             </div>
 
             <div>
@@ -140,9 +116,8 @@ function handlerSubmit(e){
                 <label>Paises 
                     <select 
                     name="countri"
-                //    value={input.countri}
-                   onChange={(e)=>handlerActivity(e)}
-                   >
+                value={input.countri.join(",")}
+                   onChange={(e)=>handlerActivity(e)}>
                     <option value=""> </option>
                     {nameCountry.map((e,index)=>{
                         return (
@@ -152,9 +127,8 @@ function handlerSubmit(e){
                             >{e.name}</option>
                             )})}
                     </select>
-            <span>{error.countri? error.countri: ""}</span>
-
                 </label>
+                    {error.countri===""? <span>{error.countri}</span>: null}
 
                 {/* nomstrar en pantalla */}
                 <ul>

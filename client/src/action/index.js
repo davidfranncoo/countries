@@ -52,3 +52,12 @@ export function postActivity(payload){
         }
     }
 }
+export function getDetails(id){
+    return async function(dispatch){
+        const getDetails=await axios.get("http://localhost:3001/countries/"+ id)
+        return dispatch ({
+            type: "ONE_DETAILS",
+            payload:getDetails.data,
+        })
+    }
+}
