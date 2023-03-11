@@ -56,6 +56,7 @@ export default function rootRecuducer(state=intialState,action){
 
         case "ONE_DETAILS":
             return{
+                ...state,
                 details:action.payload
             }
             default:

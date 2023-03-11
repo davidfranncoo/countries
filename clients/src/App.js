@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import LandiPage from './componente/LandiPage';
+import LandiPage from './componente/LandiPage/LandiPage';
 import Home from './componente/Home';
 import CreatedActivity from "./componente/CreateActivity/CreatedActivity"
 import Details from "./componente/Details"
