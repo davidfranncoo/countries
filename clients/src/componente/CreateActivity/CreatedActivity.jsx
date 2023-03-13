@@ -6,7 +6,7 @@ import "./CreateActivity.css"
 
 export default function CreatedActivity(){
 const dispatch=useDispatch();
-const  nameCountry= useSelector(state=>state.nameCounties)||[];
+const nameCountry= useSelector(state=>state.nameCounties)||[];
 const [error,setError]=useState({})
 const [input,setInput]=useState({name:"", dificultad:"", duracion:"", temporada:"", countri: []})
 
@@ -20,7 +20,7 @@ useEffect(()=>{
         if(!valor.dificultad) error.dificultad=" No debes agregar una Dificultad"
         if(!valor.duracion) error.duracion="Debes agregar una Duracion"
         if(!valor.temporada) error.temporada="Debes agregar una Tempòrada" 
-        if(!valor.countri) error.countri="Debes agregar un pais"    
+        if(valor.countri==="") error.countri="Debes agregar un pais"    
 
     return error}
 
@@ -115,9 +115,9 @@ function handlerSubmit(e){
                     {/* vamos a mostrar todos los paises y vamos a agregar en e el mostrrador */}
                 <label>Paises 
                     <select 
-                    name="countri"
+                name="countri"
                 value={input.countri.join(",")}
-                   onChange={(e)=>handlerActivity(e)}>
+                onChange={(e)=>handlerActivity(e)}>
                     <option value=""> </option>
                     {nameCountry.map((e,index)=>{
                         return (

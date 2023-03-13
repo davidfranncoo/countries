@@ -1,11 +1,55 @@
+@font-face {
+    font-family: 'MiFuente';
+    src: url('../../fonts/Visage\ Bold\ Demolished.woff2') format('woff2');
+  }
 body{
     
-    background-image: url('../../img/mundi.jpg');
+    /* background-image: url('../../img/mundi.jpg'); */
     background-size: cover;
+   
+    background-color: rgb(0, 0, 48);
     /* background-repeat: no-repeat;
     background-position: center center */
     background-position: center top;
 }
+.conteiner{
+    display: flex;
+  justify-content: center;
+
+}
 .inicio{
    color: aliceblue;
+   margin-top: 200px;
+   display: flex;
+   color: aliceblue;
+   flex-direction: column;
+}
+
+.boton{
+    background-image: linear-gradient(to right,#af3ed0, #da3c83);
+    border: none;
+    border-radius: 10px;
+    color:white;
+    padding: 15px 32px; 
+    text-align: center;
+    display: inline-block; 
+    font-size: 20px; 
+    margin: 4px 2px;
+    transition: background-color 0.3s ease; 
+}
+.boton:hover{
+    background-image: linear-gradient(to right,#3d1947, #642340);
+}
+.landi{
+    width: 25vw;
+    height: 45vh;
+    margin-top: 160px;
+    margin-left: 125px;
+    box-shadow: 0 0 20px #af3ed0, 0 0 30px #af3ed0, 0 0 40px #af3ed0, 0 0 50px #af3ed0;
+    border-radius: 10%;
+}
+.inicio2{
+    font-family: 'MiFuente', sans-serif;
+    font-weight: 300;
+    font-size: 55px;
 }

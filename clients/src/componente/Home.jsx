@@ -101,7 +101,7 @@ useEffect(()=>{
                         )
                 
                })
-               : console.log("cargandoooo....")
+               : <Link to="/loading"/>
                 }
             </div>
         </div>
