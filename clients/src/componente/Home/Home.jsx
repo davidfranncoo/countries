@@ -1,10 +1,14 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
-import {getCountries, getOrderAbc, getFilterByContinent} from "../action";
-import Card from "./Card/Card"
-import Paginado from "./Paginado/Paginado"
-import SeachBar from "./SearchBar";
+import {getCountries, getOrderAbc, getFilterByContinent} from "../../action";
+import Card from "../Card/Card"
+import Loading from "../Loading/Loading";
+import Paginado from "../Paginado/Paginado"
+import SeachBar from "../SeachBar/SearchBar";
+import "./Home.css";
+import "../LandiPage/LandiPage.css"
+
 
 
 export default function Home(){
@@ -19,6 +23,7 @@ export default function Home(){
    //ordenar alfabeticamente
    const[order,setOrder]=useState("")//!entender el porque para que funcione
     const currentCountry=allCountries.slice(indexOfFirtsCountry,indexOfLastCountry);
+    const [loading, setLoading] = useState(true)
 
 const paginado=(numberPage)=>{
     setCurrent(numberPage)
@@ -40,27 +45,33 @@ function handlerFilterByContinent(e){
 }
 
 //para que se cargue ni bien le levante
-useEffect(()=>{
-    dispatch(getCountries())
+// useEffect(()=>{
+//     dispatch(getCountries())
 
 
-}, [dispatch])
+// }, [dispatch])
+useEffect(() => {
+    setLoading(true);
+    dispatch(getCountries()).then(() => setLoading(false));
+  }, [dispatch]);
 
 
     return (
-        <div>
-
-            <Link to="/create">
-            <button>Crear Actividad</button>
-            </Link>
-            <h1>home de viaje</h1>
-            <button onClick={(e)=>handlerRefresh(e)}>volver a recargar</button>
-            <div>
+        <div>   
+            <h1>PAISES DEL MUNDO</h1>
+                <Link to="/create">
+                <button className="boton">Crear Actividad</button>
+                </Link>
+                <button className="icon-recargar" onClick={(e)=>handlerRefresh(e)}>↺</button>
+            <div className="select-conteiner">
               
+
                 <select onChange={(e)=>handlerOrder(e)}>
                     <option value="asc">Ascendente</option>
                     <option value="des">Descendente</option>
                 </select>
+              
+            
                 <select>
                     <option value="asce">pobacion mayAmen</option>
                     <option value="desc">Descendente maenAmay</option>
@@ -82,16 +93,18 @@ useEffect(()=>{
                 </select>
             </div>
             <div>
+                <SeachBar/> 
                 <Paginado 
                         countryPerPage={countryPerPage}
                         allCountries={allCountries.length}
                         paginado={paginado}
                 />
-                   <SeachBar/> 
                 </div>
                 <div>
-               {currentCountry?
-               currentCountry.map((e,index)=>{
+               {loading?
+               <Loading/>
+           
+               : currentCountry.map((e,index)=>{
                     return (
                         <Fragment key={index}>
                             <Link to={"/home/" + e.id}>
@@ -101,7 +114,6 @@ useEffect(()=>{
                         )
                 
                })
-               : <Link to="/loading"/>
                 }
             </div>
         </div>

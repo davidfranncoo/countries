@@ -10,6 +10,7 @@ const nameCountry= useSelector(state=>state.nameCounties)||[];
 const [error,setError]=useState({})
 const [input,setInput]=useState({name:"", dificultad:"", duracion:"", temporada:"", countri: []})
 
+
 useEffect(()=>{
     dispatch(getCountries())
 }, [dispatch])

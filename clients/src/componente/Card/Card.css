@@ -1,8 +1,31 @@
 .card{
-    padding: 10px;
+    margin: 20px;
+    
+    /* padding: 10px; */
+    border-radius: 10px;
+    border: none;
     display: inline-block;
-    width: 200px; /* Ajusta este ancho al tamaño que desees */
-    margin-right: 10px; /* Agrega un margen derecho para separar los elementos */
-    vertical-align: top; /* Alinea los elementos en la parte superior */
-   border:7px solid black;
+    width: 200px;
+    vertical-align: top;
+    background-image: linear-gradient(to right, #9597f89e, #b5b6ffa2, #9597f8a2);
+    background-color: rgb(120, 136, 237);
 }
+.card:hover{
+    background-image: linear-gradient(to right, #7476f8, #6b6efb, #7476f8);
+
+    box-shadow: 0 0 20px #af3ed0, 0 0 30px #af3ed0, 0 0 40px #af3ed0, 0 0 50px #af3ed0;
+}
+img{
+    margin: 15px;
+    width: 150px;
+    height: 125px;
+
+}
+h2{
+ font-size: 20px; 
+ color:#0b0c42
+}
+h3{
+    font-size: 15px; 
+    color:#0b0c42 
+   }

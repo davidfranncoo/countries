@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCountryByName } from "../action";
+import { getCountryByName } from "../../action";
 
 export default function SeachBar() {
   const dispatch = useDispatch();
