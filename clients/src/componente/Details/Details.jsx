@@ -1,7 +1,8 @@
 import React,{useEffect}from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getDetails } from "../action";
+import { getDetails } from "../../action";
+import "./Details.css"
 
 
 export default function Details(props){
@@ -28,21 +29,24 @@ console.log("esto es allDetails",allDetails)
 */ 
    
     return (
-        <div>
-<Link to="/home"><button> Atras </button>
+        <div >
+<Link to="/home"><button className="boton"> ◁ Atras </button>
 
 </Link>
-
-        <div>
-
         <h1>{allDetails.name}</h1>
+        <div className="details-conteiner">
+
+        <div className="conteiner-img">
+
+
         <img src={allDetails.img}  all="imagen no funciona"/>
-        <h3>  Id:   {allDetails.id}</h3>
+      
 
         </div>
 
-        <div>
+        <div className="conteiner-info"> 
         <h3>Capital: <span>{allDetails.Capital}</span></h3>
+        <h3>  Id:   {allDetails.id}</h3>
         <h3>continente: <span>{allDetails.continente}</span></h3>
         <h3>Poblacion: <span>{allDetails.poblacion}</span></h3>
         <h3>Subregion: <span>{allDetails.subregion}</span></h3>
@@ -50,6 +54,7 @@ console.log("esto es allDetails",allDetails)
         </div>
 
 
+        </div>
 
         </div>
     )

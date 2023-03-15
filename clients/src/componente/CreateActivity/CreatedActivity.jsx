@@ -53,13 +53,15 @@ function handlerSubmit(e){
     return(
         <div>    
             <Link to="/Home">
-                <button> Atras </button>
+                <button className="boton-searchbar"> ◁ Atras </button>
             </Link>
         <h1>Crear Actividad</h1>
         <form onSubmit={(e)=>handlerSubmit(e)}> 
-            <div>
+            <div className="form-div">
+            <div className="div-inputs">
                 <label>Nombre de la Actividad 
-                <input 
+                <input
+                className="input" 
                 type="text" 
                 placeholder="name"
                 name="name"
@@ -68,7 +70,7 @@ function handlerSubmit(e){
                 {error.name?<span>{error.name}</span>:""}
             </div>
             
-            <div>    
+            <div className="div-inputs">    
                 <label>Dificultad
                     <select 
                     name="dificultad"
@@ -83,7 +85,7 @@ function handlerSubmit(e){
                 {error.dificultad? <span> {error.dificultad}</span>: ""}
             </div>
 
-            <div>    
+            <div className="div-inputs">    
                 <label>Temporada
                     <select 
                     name="temporada"
@@ -100,9 +102,10 @@ function handlerSubmit(e){
             {error.temporada? <span>{error.temporada}</span>:  ""}
             </div>
 
-            <div>
+            <div className="div-inputs">
                 <label>Duracion 
                     <input 
+                    className="input"
                     type="number" 
                     placeholder="Horas.."
                     name="duracion"
@@ -112,7 +115,7 @@ function handlerSubmit(e){
                 {error.duracion? <span>{error.duracion}</span>: ""}
             </div>
 
-            <div>
+            <div className="div-inputs">
                     {/* vamos a mostrar todos los paises y vamos a agregar en e el mostrrador */}
                 <label>Paises 
                     <select 
@@ -140,10 +143,12 @@ function handlerSubmit(e){
                     }
                 </ul>
             </div>
-            
+            </div>
            
+            <div>
 
-            <button type="submit" >Enviar</button>
+            <button className="boton" type="submit" >Enviar</button>
+            </div>
 
             
 

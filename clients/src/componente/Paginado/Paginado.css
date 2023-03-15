@@ -2,17 +2,19 @@
     display: flex;
     border-radius: 10px; /* redondear las esquinas de la tarjeta */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* sombra de la tarjeta */
-    padding: 20px; /* espacio interno de la tarjeta */
+    /* espacio interno de la tarjeta */
 }
 nav{
     display: flex;
     justify-content: center;
 }
 .number{
-    background-color: #af3ed0;  
-    color: white; 
+     
+    color: rgb(5, 8, 81); 
     border-radius: 5px;
+    background-image: linear-gradient(to right, #9597f89e, #b5b6ffa2, #9597f8a2);
 }
 .number:hover{
-    background-color: #250230;
+   
+    background-image: linear-gradient(to right, #7476f8, #6b6efb, #7476f8);
 }

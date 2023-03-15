@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getCountryByName } from "../../action";
+import "./SearchBar.css"
 
 export default function SeachBar() {
   const dispatch = useDispatch();
@@ -24,14 +25,15 @@ export default function SeachBar() {
   return (
     <div>
       <input
+      className="input"
         type="text"
         //agregando el value, podemos hacer que el input se limpie adecuadamente una vez haga el click
         value={name}
         placeholder="Ingresa país..."
         onChange={(e) => hardlerChange(e)}
       ></input>
-      <button type="submit" onClick={(e) => handlerClick(e)}>
-        Buscar país
+      <button className="boton-searchbar" type="submit" onClick={(e) => handlerClick(e)}>
+        Buscar ▷
       </button>
     </div>
   );

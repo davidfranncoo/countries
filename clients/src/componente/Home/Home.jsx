@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
-import {getCountries, getOrderAbc, getFilterByContinent} from "../../action";
+import {getCountries, getOrderAbc, getFilterByContinent, getOrderbyCore} from "../../action";
 import Card from "../Card/Card"
 import Loading from "../Loading/Loading";
 import Paginado from "../Paginado/Paginado"
@@ -14,6 +14,7 @@ import "../LandiPage/LandiPage.css"
 export default function Home(){
     const dispatch=useDispatch()
     const allCountries=useSelector(state=>state.countries) ||[];
+    console.log("alll", allCountries)
 
     const [current,setCurrent]=useState(1)
     //paginado
@@ -43,6 +44,12 @@ function handlerOrder(e){
 function handlerFilterByContinent(e){
     dispatch(getFilterByContinent(e.target.value))    
 }
+function handlerCores(e){
+    e.preventDefault()
+    dispatch(getOrderbyCore(e.target.value))
+    setCurrent(1);
+    setOrder(`${e.target.value}`)
+}
 
 //para que se cargue ni bien le levante
 // useEffect(()=>{
@@ -63,18 +70,21 @@ useEffect(() => {
                 <button className="boton">Crear Actividad</button>
                 </Link>
                 <button className="icon-recargar" onClick={(e)=>handlerRefresh(e)}>↺</button>
+           <SeachBar/> 
             <div className="select-conteiner">
               
 
                 <select onChange={(e)=>handlerOrder(e)}>
-                    <option value="asc">Ascendente</option>
-                    <option value="des">Descendente</option>
+                    <option  value="">Orden Alfabetico</option>
+                    <option value="asc">A - Z</option>
+                    <option value="des">Z - A</option>
                 </select>
               
             
-                <select>
-                    <option value="asce">pobacion mayAmen</option>
-                    <option value="desc">Descendente maenAmay</option>
+                <select onChange={(e)=>handlerCores(e)}>
+                <option  value="">Orden Poblacional</option>
+                    <option value="asce">Ascendente</option>
+                    <option value="desc">Descendente</option>
                 </select>
                 <select onChange={(e)=>handlerFilterByContinent(e)}>
                     <option value="all">Todos Los Continentes</option>
@@ -87,13 +97,13 @@ useEffect(() => {
                   
                 </select>
                 <select>
-                   
+                    <option  value="">Actividades</option>
                     <option value="act 1">actividad1</option>
                     <option value="act 2"> actividad2</option>
                 </select>
             </div>
             <div>
-                <SeachBar/> 
+                
                 <Paginado 
                         countryPerPage={countryPerPage}
                         allCountries={allCountries.length}

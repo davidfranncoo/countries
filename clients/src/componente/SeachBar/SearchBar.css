@@ -1,0 +1,33 @@
+.input{
+    margin:5px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif; /* Utilizo la fuente Arial o una fuente sans-serif si no está disponible */
+    font-size: 16px; /* Tamaño de fuente de 16 píxeles */
+    padding: 3px; /* Añade un espacio de 10 píxeles dentro del borde del elemento */
+    border: none; /* Establece un borde de 2 píxeles de ancho con un color azul oscuro */
+    background-color: #af3ed0; /* Establece un color de fondo gris claro */
+    color: white; /* Establece el color del texto en azul oscuro */
+    
+}
+.input:focus {
+    outline: none; /* Elimina el borde que aparece al enfocar el elemento */
+    border: 2px solid #bf70ff; /* Establece un borde de 2 píxeles de ancho con un color azul medio */
+    box-shadow: 0 0 5px #bf70ff; /* Agrega una sombra al elemento para resaltarlo */
+  }
+.input::placeholder{
+    color:rgb(177, 180, 182);
+}
+.boton-searchbar{
+    background-image: linear-gradient(to right,#af3ed0, #da3c83);
+    border: none;
+    border-radius: 10px;
+    color:white;
+    text-align: center;
+    display: inline-block; 
+    font-size: 20px; 
+    margin: 4px 2px;
+    transition: background-color 0.3s ease; 
+}
+.boton-boton-searchbar:hover{
+    background-image: linear-gradient(to right,#3d1947, #642340);
+}

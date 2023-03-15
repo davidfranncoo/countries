@@ -59,7 +59,26 @@ export default function rootRecuducer(state=intialState,action){
                 ...state,
                 details:action.payload
             }
-            default:
+        case "ORDER_BY_SCORES":
+            const Score=state.countries;
+            const filter2=action.payload==="asce"?
+            Score.sort((a,b)=>{
+
+                if(a.poblacion<b.poblacion)return -1;
+                if(a.poblacion>b.poblacion)return 1;
+                return 0;
+            }):
+            Score.sort((a,b)=>{
+                if(a.poblacion>b.poblacion)return -1;
+                if(a.poblacion<b.poblacion)return 1;
+                return 0;
+            })
+            console.log("1111111", filter2)
+            return{
+                ...state,
+                countries:filter2
+            }
+            default: 
                 return state;
     }
     

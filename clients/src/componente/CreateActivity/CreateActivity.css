@@ -1,3 +1,19 @@
 span{
     color:red;
 }
+ form{
+    display: flex;
+    flex-direction: column;
+    color:white
+ }
+ .form-div{
+    margin-left: 22%;
+    display: flex;
+    flex-direction: column;
+    /* align-content: stretch; */
+    justify-content: center;
+    align-items: flex-start;
+ }
+ .div-inputs{
+    margin: 10px;
+ }

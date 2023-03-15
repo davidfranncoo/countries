@@ -37,9 +37,8 @@ export function getFilterByContinent(payload){
     return {
         type:"FILTER_BY_CONTINENT",
         payload,
-    }
+    }}
 
-}
 //? Agregar activad nueva
 export function postActivity(payload){
     return async function(dispatch){
@@ -61,3 +60,8 @@ export function getDetails(id){
         })
     }
 }
+export function getOrderbyCore(payload){
+    return{
+        type: "ORDER_BY_SCORES",
+        payload,
+    }}
