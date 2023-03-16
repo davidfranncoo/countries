@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCountries, postActivity } from "../../action";
+import { filterActivity, getCountries, postActivity } from "../../action";
 import "./CreateActivity.css"
 
 export default function CreatedActivity(){
@@ -15,13 +15,15 @@ useEffect(()=>{
     dispatch(getCountries())
 }, [dispatch])
 
+
  function validacion(valor){
     let error={}
         if(!/^[a-zA-Z\s]+$/.test(valor.name)) error.name="Debes ingresar solo letras"
-        if(!valor.dificultad) error.dificultad=" No debes agregar una Dificultad"
+        if(!valor.dificultad) error.dificultad=" Debes agregar una Dificultad"
         if(!valor.duracion) error.duracion="Debes agregar una Duracion"
         if(!valor.temporada) error.temporada="Debes agregar una Tempòrada" 
-        if(valor.countri==="") error.countri="Debes agregar un pais"    
+        if(!valor.countri) error.countri="Debes agregar un pais" 
+      
 
     return error}
 
@@ -34,11 +36,11 @@ function handlerInput(e){
 
 //? funcion para seleccionar los paises que tienen las actividades
 function handlerActivity(e){
-    console.log("input",input)
     setInput({
         ...input,
         countri: [...input.countri, e.target.value]
-    })   
+    })  
+    console.log("esto es error", input.countri) 
      setError(validacion({...input.countri,countri:e.target.value}))
 }
 
@@ -47,7 +49,16 @@ function handlerSubmit(e){
     e.preventDefault()
     dispatch(postActivity(input));
     setInput({name:"", dificultad:"", duracion:"", temporada:"", countri:[]})
+    setError([])
     alert("se creo la actividad")}
+
+function handlerDeleteCountri(e){
+    setInput({
+        ...input,
+        countri: input.countri.filter((c) => c !== e), // filtrame por todo lo qe no sea ese elemento, me devuleve todo sin ese elemento.
+      })
+
+}
     
 //------------------MAKETADO-------------------------
     return(
@@ -118,27 +129,34 @@ function handlerSubmit(e){
             <div className="div-inputs">
                     {/* vamos a mostrar todos los paises y vamos a agregar en e el mostrrador */}
                 <label>Paises 
+
                     <select 
-                name="countri"
-                value={input.countri.join(",")}
-                onChange={(e)=>handlerActivity(e)}>
+                        name="countri"
+                        value={input.countri
+                             .join(",")
+                        }
+                        onChange={(e)=>handlerActivity(e)}>
                     <option value=""> </option>
-                    {nameCountry.map((e,index)=>{
+                    {nameCountry.map((e)=>{
+                      
                         return (
-                            <option 
-                            key={index} 
-                            value={e.id}
-                            >{e.name}</option>
-                            )})}
+
+                            <option key={e.id} value={e.id} name={e.name}>{e.name}</option>)})}
+                    
                     </select>
+
                 </label>
-                    {error.countri===""? <span>{error.countri}</span>: null}
+                    {error.countri? <span>{error.countri}</span>: null}
 
                 {/* nomstrar en pantalla */}
                 <ul>
                     {
                         input.countri.map((e,index)=>{
-                            return( <li key={index}> {e}</li>)
+                            return( <li key={index}> {e}
+                            <button 
+                            className= "boton-searchbar"
+                            onClick={()=>handlerDeleteCountri(e)}
+                            >X</button></li>)
                         })
                     }
                 </ul>
@@ -147,7 +165,14 @@ function handlerSubmit(e){
            
             <div>
 
-            <button className="boton" type="submit" >Enviar</button>
+            <button className="boton"  type="submit" disabled={
+                 
+                    !input.name ||
+                    !input.dificultad||
+                    !input.duracion ||
+                    !input.temporada ||
+                    !input.countri.length>0
+            }>Enviar</button>
             </div>
 
             

@@ -1,7 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from "react-router-dom";
-import {getCountries, getOrderAbc, getFilterByContinent, getOrderbyCore} from "../../action";
+import {getCountries, 
+    getOrderAbc, 
+    getFilterByContinent, 
+    filterActivity,
+    getAllActivity,
+    getOrderbyCore} from "../../action";
 import Card from "../Card/Card"
 import Loading from "../Loading/Loading";
 import Paginado from "../Paginado/Paginado"
@@ -12,17 +17,18 @@ import "../LandiPage/LandiPage.css"
 
 
 export default function Home(){
-    const dispatch=useDispatch()
-    const allCountries=useSelector(state=>state.countries) ||[];
-    console.log("alll", allCountries)
+    const dispatch=useDispatch() 
+    const allCountries=useSelector(state=>state.countries) || [];
+    const actividad = useSelector(state =>state.allActivity)|| [];
+//    console.log("actividades",actividad)
 
     const [current,setCurrent]=useState(1)
     //paginado
     const countryPerPage=10;
     const indexOfLastCountry=current*countryPerPage;//10
-    const indexOfFirtsCountry= indexOfLastCountry-countryPerPage;//9
+    const indexOfFirtsCountry= indexOfLastCountry-countryPerPage;//0
    //ordenar alfabeticamente
-   const[order,setOrder]=useState("")//!entender el porque para que funcione
+   const[,setOrder]=useState("")//!entender el porque para que funcione
     const currentCountry=allCountries.slice(indexOfFirtsCountry,indexOfLastCountry);
     const [loading, setLoading] = useState(true)
 
@@ -50,6 +56,11 @@ function handlerCores(e){
     setCurrent(1);
     setOrder(`${e.target.value}`)
 }
+function handleFilterActivity(e){
+    // setCurrentPage(1);
+    dispatch(filterActivity(e.target.value))
+    // console.log("eeeee",e.target.value)
+}
 
 //para que se cargue ni bien le levante
 // useEffect(()=>{
@@ -57,9 +68,12 @@ function handlerCores(e){
 
 
 // }, [dispatch])
+   
 useEffect(() => {
     setLoading(true);
     dispatch(getCountries()).then(() => setLoading(false));
+    dispatch(getAllActivity())
+
   }, [dispatch]);
 
 
@@ -79,8 +93,6 @@ useEffect(() => {
                     <option value="asc">A - Z</option>
                     <option value="des">Z - A</option>
                 </select>
-              
-            
                 <select onChange={(e)=>handlerCores(e)}>
                 <option  value="">Orden Poblacional</option>
                     <option value="asce">Ascendente</option>
@@ -96,11 +108,23 @@ useEffect(() => {
                     <option value="Antarctica">Antartico</option>
                   
                 </select>
-                <select>
-                    <option  value="">Actividades</option>
-                    <option value="act 1">actividad1</option>
-                    <option value="act 2"> actividad2</option>
-                </select>
+
+               
+
+                <select
+                 onChange={(e) => handleFilterActivity(e)}
+                >
+            <option value="">Actividades</option>
+ 
+            {actividad?.map((e) => {
+                return (
+                <option id={e.id} key={e.id} value={e.name}>
+                    {e.name}
+                </option>
+                );
+  })}
+</select>
+
             </div>
             <div>
                 

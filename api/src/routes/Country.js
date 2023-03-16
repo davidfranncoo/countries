@@ -31,20 +31,29 @@ const getCountries=async()=>{
     return order;
     }
     
-
+ 
     
 router.get("/",async(req,res)=>{
 
        //?---traemos la informacion de la API
        const {name}=req.query;// en caso que recibamos el nombre
        const infoApi=await getCountries();
-       const dataBase=await Country.findAll()
+       const dataBase=await Country.findAll(
+            {
+            include: [{ model: Activity }],
+        }
+      )
 
        //? SI recibimos el el name por query 
             if(name){
-                const dataBase=await Country.findAll();
+                const dataBase=await Country.findAll(
+                    {
+                        include: [{ model: Activity }],
+                  }
+                  );
                 const nameDb=await dataBase.find((e)=>e.name===name)
                 if(nameDb) return res.status(200).json(nameDb);
+                
                 return res.status(400).send("no existe ciudad con este nombre")
             }
         //?SI esta vacia la Db

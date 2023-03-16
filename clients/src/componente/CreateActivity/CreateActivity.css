@@ -17,3 +17,9 @@ span{
  .div-inputs{
     margin: 10px;
  }
+ ul{
+   display: flex;    
+ }
+ li{
+   list-style: none;
+ }

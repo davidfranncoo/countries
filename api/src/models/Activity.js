@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
           
         },
         temporada:{
-            //! controlar el datatype porque era ENUM
+            
            type:DataTypes.STRING, 
             allowNull:false,
         }

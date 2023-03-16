@@ -16,7 +16,7 @@ router.post("/", async(req,res)=>{
      }=req.body; 
 
      //validamos queesten los datos
-    console.log("booooody", req.body)
+   console.log("booooody", req.body)
     if(name&&dificultad&&duracion&&temporada&&countri){
         //creamos la actividad
            const createActivity=await  Activity.create(

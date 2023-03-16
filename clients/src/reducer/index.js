@@ -2,7 +2,8 @@ const intialState={
     countries:[],
     suportCountries:[],
     nameCounties:[],
-    details:[]
+    details:[],
+    allActivity:[]
 }
 export default function rootRecuducer(state=intialState,action){
 
@@ -73,16 +74,71 @@ export default function rootRecuducer(state=intialState,action){
                 if(a.poblacion<b.poblacion)return 1;
                 return 0;
             })
-            console.log("1111111", filter2)
+            
             return{
                 ...state,
                 countries:filter2
             }
-            default: 
+
+
+            case "ALL_ACTIVITY":
+                const allACtiviti=action.payload
+                return{ 
+                    ...state,
+                    allActivity:allACtiviti
+                }
+
+            case "FILTER_ACTIVITY":
+                const countriAll=state.suportCountries
+               
+                console.log("action.payload",action.payload)
+                const filtroActividad=  action.payload==="all"?
+                countriAll.filter((e)=>e.Activities.length>0):
+                countriAll.filter((e)=>{
+                    return e.Activities.find((c)=>c.name===action.payload)})
+                    
+                  
+             
+                // action.payload==="all"?
+                //     countriAll.filter((e)=>e.Activities)
+                //     :
+                //     countriAll.filter((e)=>{e.Activities
+                    
+                //   &&
+                //   e.Activities.map((a)=>a.name===action.payload)
+                //   //.include(action.payload)
+                //   //.includes(action.payload)
+                    
+                        
+
+         
+            
+            // const countriesAll = state.allCountries;
+            // const filterActivities =
+            //   action.payload === "All"
+            //     ? countriesAll.filter((c) => c.activities)
+            //     : countriesAll.filter(
+                //         (c) =>
+                //           c.activities &&
+                //           c.activities.map((a) => a.name).includes(action.payload)
+                //     //       );
+                //     const filterActivities=action.payload
+                //    console.log("filete de reducer", filterActivities)
+                console.log("fillltro",filtroActividad)
+                return {
+                    ...state,
+                    countries:filtroActividad
+                    
+                    
+                    
+                };
+               
+                default: 
                 return state;
+            }
     }
     
-}
+
 /*area
 : 
 "12173"

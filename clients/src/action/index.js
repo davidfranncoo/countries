@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios  from "axios"
+
 
 export function getCountries(){
 return async function(dispatch){
@@ -45,10 +46,10 @@ export function postActivity(payload){
 
         const response= await axios.post("http://localhost:3001/activities",payload)
         
-        return {
+        return dispatch({
             type:"POST_ACTIVITY",
             response,
-        }
+        })
     }
 }
 export function getDetails(id){
@@ -65,3 +66,22 @@ export function getOrderbyCore(payload){
         type: "ORDER_BY_SCORES",
         payload,
     }}
+export function getAllActivity(){
+    return async function (dispatch){
+        const allActi=await axios("http://localhost:3001/activities")
+    
+        return dispatch({
+            type:"ALL_ACTIVITY",
+        payload:allActi.data
+        })
+    }
+}
+export function  filterActivity(payload){
+
+
+    return {
+        type: "FILTER_ACTIVITY",
+        payload,
+        
+    }
+}

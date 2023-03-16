@@ -45,7 +45,10 @@ console.log("esto es allDetails",allDetails)
         </div>
 
         <div className="conteiner-info"> 
-        <h3>Capital: <span>{allDetails.Capital}</span></h3>
+        <h3>Capital: <span>{allDetails.capital
+        // ?allDetails.capital.replace(/[{}]/g, ''):""
+        
+        }</span></h3>
         <h3>  Id:   {allDetails.id}</h3>
         <h3>continente: <span>{allDetails.continente}</span></h3>
         <h3>Poblacion: <span>{allDetails.poblacion}</span></h3>
