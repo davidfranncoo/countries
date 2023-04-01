@@ -32,6 +32,7 @@ function handlerInput(e){
 
     setInput({...input,[e.target.name]:e.target.value})
     setError(validacion({...input,[e.target.name]:e.target.value}))
+    console.log("input",input)
 }
 
 //? funcion para seleccionar los paises que tienen las actividades

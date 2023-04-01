@@ -1,35 +1,41 @@
+
+
+
+
 const { Router } = require("express");
 const { Activity, Country } = require("../db");
 const axios = require("axios");
 const router = Router();
 
-const getCountries=async()=>{
-    const countries= await axios("https://restcountries.com/v3/all");
+
+
+// const getCountries=async()=>{
+//     const countries= await axios("https://restcountries.com/v3/all");
     
-    const order=await countries.data.map((e)=>{
-        return{
-            //traiga strong que es la abreviacion
-            id:e.cca3, 
-            //string
-        name:e.name.common,
-        //recibe array con 2 string
-        img:e.flags[0],
-        //array de un string
-        continente:e.continents[0],
-        //array de un string
-        capital:e.capital,
-        //array de un string
-        subregion:e.continents[0],
-        //recibe number
-        area:e.area,
-        //recibe number
-        poblacion:e.population   
-    }})        
-    //?guardamos la informacion,de la API en la DB
-    //const updateDb = await Country.bulkCreate(order);
+//     const order=await countries.data.map((e)=>{
+//         return{
+//             //traiga strong que es la abreviacion
+//             id:e.cca3, 
+//             //string
+//         name:e.name.common,
+//         //recibe array con 2 string
+//         img:e.flags[0],
+//         //array de un string
+//         continente:e.continents[0],
+//         //array de un string
+//         capital:e.capital,
+//         //array de un string
+//         subregion:e.continents[0],
+//         //recibe number
+//         area:e.area,
+//         //recibe number
+//         poblacion:e.population   
+//     }})        
+//     //?guardamos la informacion,de la API en la DB
+//     //const updateDb = await Country.bulkCreate(order);
     
-    return order;
-    }
+//     return order;
+//     }
     
  
     
@@ -37,7 +43,7 @@ router.get("/",async(req,res)=>{
 
        //?---traemos la informacion de la API
        const {name}=req.query;// en caso que recibamos el nombre
-       const infoApi=await getCountries();
+      
        const dataBase=await Country.findAll(
             {
             include: [{ model: Activity }],
@@ -46,11 +52,12 @@ router.get("/",async(req,res)=>{
 
        //? SI recibimos el el name por query 
             if(name){
-                const dataBase=await Country.findAll(
-                    {
-                        include: [{ model: Activity }],
-                  }
-                  );
+                // const dataBase=await Country.findAll(
+                    
+                //     {
+                //         include: [{ model: Activity }],
+                //   }
+                //   );
                 const nameDb=await dataBase.find((e)=>e.name===name)
                 if(nameDb) return res.status(200).json(nameDb);
                 

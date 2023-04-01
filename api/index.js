@@ -19,10 +19,13 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const getApiData=require("./src/Controlers.js/controlers.js") 
 
 // Syncing all the models at once.
-conn.sync({ force: false}).then(() => {
-  server.listen(3001, () => {
+conn.sync({ force: true}).then(() => {
+  server.listen(3001, async() => {
+    await  getApiData()
+    console.log("DB Created");
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 }); 
