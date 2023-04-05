@@ -17,9 +17,10 @@ export default function rootRecuducer(state=intialState,action){
             }
          
         case "COUNTRY_BY_NAME":
+            console.log("reducerrrr",action.payload)
             return{
                 ...state,
-                countries:[action.payload]
+                countries:action.payload
             }
 
         case "ORDER_BY_NAME":

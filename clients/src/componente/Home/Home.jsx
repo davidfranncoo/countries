@@ -19,6 +19,7 @@ import "../LandiPage/LandiPage.css"
 export default function Home(){
     const dispatch=useDispatch() 
     const allCountries=useSelector(state=>state.countries) || [];
+    console.log("allcountries",allCountries)
     const actividad = useSelector(state =>state.allActivity)|| [];
 //    console.log("actividades",actividad)
 

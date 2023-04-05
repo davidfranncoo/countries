@@ -12,6 +12,7 @@ return async function(dispatch){
 
 }
 export function getCountryByName(name){
+  
 return async function (dispatch){
     try {
          const json= await axios.get("http://localhost:3001/countries?name="+ name)
