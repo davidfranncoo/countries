@@ -20,12 +20,12 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const getApiData=require("./src/Controlers.js/controlers.js") 
-
+const port=process.env.PORT || 3001;
 // Syncing all the models at once.
 conn.sync({ force: true}).then(() => {
   server.listen(3001, async() => {
     await  getApiData()
     console.log("DB Created");
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log(`%s listening at ${port}`); // eslint-disable-line no-console
   });
 }); 
