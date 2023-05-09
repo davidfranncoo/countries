@@ -39,7 +39,7 @@ console.log("esto es allDetails",allDetails)
         <div className="conteiner-img">
 
 
-        <img src={allDetails.img}  all="imagen no funciona"/>
+        <img src={allDetails.img}  alt="imagen no funciona"/>
       
 
         </div>

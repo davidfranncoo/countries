@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { filterActivity, getCountries, postActivity } from "../../action";
+import { getCountries, postActivity } from "../../action";
 import "./CreateActivity.css"
 
 export default function CreatedActivity(){
